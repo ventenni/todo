@@ -1,0 +1,54 @@
+[
+	{
+		"name": "reminders",
+		"icon": "path/to/icon",
+		"items": [
+			{
+				"title": "take out rubbish",
+				"date": "01-01-2023",
+				"completed": false
+			},
+			{
+				"title": "take out rubbish",
+				"date": "01-01-2023",
+				"completed": false
+			},
+			{
+				"title": "take out rubbish",
+				"date": "01-01-2023",
+				"completed": false
+			},
+			{
+				"title": "take out rubbish",
+				"date": "01-01-2023",
+				"completed": false
+			}
+		]
+	},
+	{
+		"name": "groceries",
+		"icon": "path/to/icon",
+		"items": [
+			{
+				"title": "eggs",
+				"date": "",
+				"completed": false
+			},
+			{
+				"title": "eggs",
+				"date": "",
+				"completed": false
+			},
+			{
+				"title": "eggs",
+				"date": "",
+				"completed": false
+			},
+			{
+				"title": "eggs",
+				"date": "",
+				"completed": false
+			}
+		]
+	}
+]

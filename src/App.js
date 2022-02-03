@@ -8,22 +8,85 @@ import ToDoContainer from './components/ToDoContainer';
 import useLocalStorage from './hooks/useLocalStore';
 
 const App = () => {
-	const [listItems, setListItems] = useLocalStorage('test', {
-		items: [
-			'list item',
-			'list item',
-			'list item',
-			'list item',
-			'list item',
-		],
-	});
+	const [listItems, setListItems] = useLocalStorage('todo', [
+		{
+			name: 'reminders',
+			items: [
+				{
+					title: 'list item',
+					date: '01-01-2023',
+					completed: false,
+				},
+				{
+					title: 'list item',
+					date: '01-01-2023',
+					completed: false,
+				},
+				{
+					title: 'list item',
+					date: '01-01-2023',
+					completed: false,
+				},
+				{
+					title: 'list item',
+					date: '01-01-2023',
+					completed: false,
+				},
+			],
+		},
+		{
+			name: 'groceries',
+			items: [
+				{
+					title: 'eggs',
+					date: '',
+					completed: false,
+				},
+				{
+					title: 'eggs',
+					date: '',
+					completed: false,
+				},
+				{
+					title: 'eggs',
+					date: '',
+					completed: false,
+				},
+				{
+					title: 'eggs',
+					date: '',
+					completed: false,
+				},
+			],
+		},
+	]);
 	const [newListItem, setNewListItem] = useState('');
 
-	const addItemToList = (e) => {
-		console.log('add item to list');
-
+	const addItemToList = (e, selectedList) => {
 		e.preventDefault();
-		setListItems({ items: [...listItems.items, newListItem] });
+
+		if (newListItem.length === 0) return;
+
+		setListItems(
+			listItems.map((item) =>
+				item.name === selectedList.name
+					? {
+							name: item.name,
+							items: [
+								...item.items,
+								{
+									title: newListItem,
+									date: '',
+									completed: false,
+								},
+							],
+							icon: item.icon,
+					  }
+					: {
+							...item,
+					  }
+			)
+		);
 
 		setNewListItem('');
 	};
