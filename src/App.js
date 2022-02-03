@@ -1,52 +1,46 @@
 import './App.scss';
 import React, { useState, useEffect } from 'react';
 
-function App() {
-	const [listItems, setListItems] = useState([
-		'list item',
-		'list item',
-		'list item',
-		'list item',
-		'list item',
-	]);
+// Components
+import ToDoContainer from './components/ToDoContainer';
 
+// Hooks
+import useLocalStorage from './hooks/useLocalStore';
+
+const App = () => {
+	const [listItems, setListItems] = useLocalStorage('test', {});
 	const [newListItem, setNewListItem] = useState('');
+
+	useEffect(() => {
+		setListItems({
+			items: [
+				'list item',
+				'list item',
+				'list item',
+				'list item',
+				'list item',
+			],
+		});
+	}, []);
 
 	const addItemToList = (e) => {
 		e.preventDefault();
-		setListItems([...listItems, newListItem]);
+		setListItems({ items: [...listItems.items, newListItem] });
 
 		setNewListItem('');
 	};
 
 	return (
 		<div className="todo">
-			<div className="todo__container">
-				<div className="todo__container__list">
-					<ul>
-						{listItems.map((item, i) => {
-							return (
-								<li
-									className="todo__container__list__item"
-									key={i}
-								>
-									{`${item} ${i}`}
-								</li>
-							);
-						})}
-					</ul>
-
-					<input
-						type="text"
-						placeholder="Add item..."
-						value={newListItem}
-						onChange={(e) => setNewListItem(e.target.value)}
-					/>
-					<button onClick={(e) => addItemToList(e)}>Save</button>
-				</div>
-			</div>
+			<ToDoContainer
+				addItemToList={addItemToList}
+				listItems={listItems}
+				setListItems={setListItems}
+				newListItem={newListItem}
+				setNewListItem={setNewListItem}
+			/>
 		</div>
 	);
-}
+};
 
 export default App;
