@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import React, { useState, useEffect } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [listItems, setListItems] = useState([
+		'list item',
+		'list item',
+		'list item',
+		'list item',
+		'list item',
+	]);
+
+	const [newListItem, setNewListItem] = useState('');
+
+	const addItemToList = (e) => {
+		e.preventDefault();
+		setListItems([...listItems, newListItem]);
+
+		setNewListItem('');
+	};
+
+	return (
+		<div className="todo">
+			<div className="todo__container">
+				<div className="todo__container__list">
+					<ul>
+						{listItems.map((item, i) => {
+							return (
+								<li
+									className="todo__container__list__item"
+									key={i}
+								>
+									{`${item} ${i}`}
+								</li>
+							);
+						})}
+					</ul>
+
+					<input
+						type="text"
+						placeholder="Add item..."
+						value={newListItem}
+						onChange={(e) => setNewListItem(e.target.value)}
+					/>
+					<button onClick={(e) => addItemToList(e)}>Save</button>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default App;
