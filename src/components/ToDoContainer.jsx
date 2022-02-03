@@ -11,9 +11,10 @@ const ToDoContainer = ({
 		<div className="todo__container">
 			<div className="todo__container__list">
 				<ul>
-					{listItems.items.map((item, i) => {
-						return <ToDoItem item={item} key={i} counter={i} />;
-					})}
+					{listItems?.items &&
+						listItems.items.map((item, i) => {
+							return <ToDoItem item={item} key={i} counter={i} />;
+						})}
 				</ul>
 
 				<input
