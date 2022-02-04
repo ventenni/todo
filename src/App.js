@@ -1,11 +1,11 @@
 import './App.scss';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import {
-	addList,
-	addReminderToList,
-	completeReminder,
+	// addList,
+	// addReminderToList,
+	// completeReminder,
 	test,
 } from './redux/todoSlice';
 
@@ -19,51 +19,11 @@ const App = () => {
 	const reduxLists = useSelector((state) => state.reminder.reminders);
 	const dispatch = useDispatch();
 
-	const [listItems, setListItems] = useLocalStorage('todo', [...reduxLists]);
-	// const [newListItem, setNewListItem] = useState('');
-
-	// const addItemToList = (e, selectedList) => {
-	// 	e.preventDefault();
-
-	// 	if (newListItem.length === 0) return;
-
-	// 	setListItems(
-	// 		listItems.map((item) =>
-	// 			item.name === selectedList.name
-	// 				? {
-	// 						name: item.name,
-	// 						items: [
-	// 							...item.items,
-	// 							{
-	// 								title: newListItem,
-	// 								date: '',
-	// 								completed: false,
-	// 							},
-	// 						],
-	// 						icon: item.icon,
-	// 				  }
-	// 				: {
-	// 						...item,
-	// 				  }
-	// 		)
-	// 	);
-
-	// 	console.log(listItems);
-
-	// 	setNewListItem('');
-	// };
-
-	console.log(reduxLists);
+	const [listItems, setListItems] = useLocalStorage('todo', reduxLists);
 
 	return (
 		<div className="todo">
-			<ToDoContainer
-				addItemToList={() => dispatch(addReminderToList())}
-				listItems={reduxLists}
-				setListItems={setListItems}
-				// newListItem={newListItem}
-				// setNewListItem={setNewListItem}
-			/>
+			<ToDoContainer listItems={reduxLists} />
 
 			<button onClick={() => dispatch(test())}> Test </button>
 		</div>

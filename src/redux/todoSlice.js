@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const reminderSlice = createSlice({
 	name: 'reminder',
 	initialState: {
-		reminders: [
+		reminders: setLocalStorage('todo', [
 			{
 				id: '0',
 				name: 'reminders',
@@ -66,7 +66,7 @@ export const reminderSlice = createSlice({
 					},
 				],
 			},
-		],
+		]),
 		value: 0,
 	},
 	reducers: {
@@ -84,9 +84,9 @@ export const reminderSlice = createSlice({
 
 		addReminderToList: (state, action) => {
 			console.log('add reminder to list', action.payload);
-			state.reminders.map((list) => {
-				if (list.id === action.payload.selectedList.id) {
-					return list.items.push({
+			state.reminders.forEach((list) => {
+				if (list.id === action.payload.id) {
+					list.items.push({
 						id: list.items.length,
 						title: action.payload.newListItem,
 						date: new Date() + 1,
@@ -97,8 +97,8 @@ export const reminderSlice = createSlice({
 		},
 
 		completeReminder: (state, action) => {
-			state.reminders.map((list) => {
-				return list.map((item) => {
+			state.reminders.forEach((list) => {
+				return list.forEach((item) => {
 					if (action.payload.id === item.id) {
 						item.completed = true;
 					}
@@ -108,6 +108,24 @@ export const reminderSlice = createSlice({
 		},
 	},
 });
+
+// Performed on first page load
+function setLocalStorage(key, initialValue) {
+	try {
+		// Get from local storage by key
+		const item = window.localStorage.getItem(key);
+		// Parse stored json or if none return initialValue
+		return item ? JSON.parse(item) : initialValue;
+	} catch (error) {
+		// If error also return initialValue
+		console.log('todo slice line 121', error);
+		return initialValue;
+	}
+}
+
+function addToLocalStorage() {
+	console.log('test');
+}
 
 // Action creators are generated for each case reducer function
 export const { test, addList, addReminderToList, completeReminder } =

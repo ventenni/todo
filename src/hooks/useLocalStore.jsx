@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // Hook
 function useLocalStorage(key, initialValue) {
@@ -16,6 +16,10 @@ function useLocalStorage(key, initialValue) {
 			return initialValue;
 		}
 	});
+
+	// useEffect(() => {
+	// 	window.localStorage.setItem(key, JSON.stringify(storedValue));
+	// }, [key, storedValue]);
 
 	// Return a wrapped version of useState's setter function that ...
 	// ... persists the new value to localStorage.
