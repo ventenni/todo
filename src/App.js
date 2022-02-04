@@ -1,5 +1,13 @@
 import './App.scss';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+
+import { useSelector, useDispatch } from 'react-redux';
+import {
+	addList,
+	addReminderToList,
+	completeReminder,
+	test,
+} from './redux/todoSlice';
 
 // Components
 import ToDoContainer from './components/ToDoContainer';
@@ -8,100 +16,61 @@ import ToDoContainer from './components/ToDoContainer';
 import useLocalStorage from './hooks/useLocalStore';
 
 const App = () => {
-	const [listItems, setListItems] = useLocalStorage('todo', [
-		{
-			name: 'reminders',
-			items: [
-				{
-					title: 'list item',
-					date: '01-01-2023',
-					completed: false,
-				},
-				{
-					title: 'list item',
-					date: '01-01-2023',
-					completed: false,
-				},
-				{
-					title: 'list item',
-					date: '01-01-2023',
-					completed: false,
-				},
-				{
-					title: 'list item',
-					date: '01-01-2023',
-					completed: false,
-				},
-			],
-		},
-		{
-			name: 'groceries',
-			items: [
-				{
-					title: 'eggs',
-					date: '',
-					completed: false,
-				},
-				{
-					title: 'eggs',
-					date: '',
-					completed: false,
-				},
-				{
-					title: 'eggs',
-					date: '',
-					completed: false,
-				},
-				{
-					title: 'eggs',
-					date: '',
-					completed: false,
-				},
-			],
-		},
-	]);
-	const [newListItem, setNewListItem] = useState('');
+	const reduxLists = useSelector((state) => state.reminder.reminders);
+	const dispatch = useDispatch();
 
-	const addItemToList = (e, selectedList) => {
-		e.preventDefault();
+	const [listItems, setListItems] = useLocalStorage('todo', [...reduxLists]);
+	// const [newListItem, setNewListItem] = useState('');
 
-		if (newListItem.length === 0) return;
+	// const addItemToList = (e, selectedList) => {
+	// 	e.preventDefault();
 
-		setListItems(
-			listItems.map((item) =>
-				item.name === selectedList.name
-					? {
-							name: item.name,
-							items: [
-								...item.items,
-								{
-									title: newListItem,
-									date: '',
-									completed: false,
-								},
-							],
-							icon: item.icon,
-					  }
-					: {
-							...item,
-					  }
-			)
-		);
+	// 	if (newListItem.length === 0) return;
 
-		setNewListItem('');
-	};
+	// 	setListItems(
+	// 		listItems.map((item) =>
+	// 			item.name === selectedList.name
+	// 				? {
+	// 						name: item.name,
+	// 						items: [
+	// 							...item.items,
+	// 							{
+	// 								title: newListItem,
+	// 								date: '',
+	// 								completed: false,
+	// 							},
+	// 						],
+	// 						icon: item.icon,
+	// 				  }
+	// 				: {
+	// 						...item,
+	// 				  }
+	// 		)
+	// 	);
+
+	// 	console.log(listItems);
+
+	// 	setNewListItem('');
+	// };
+
+	console.log(reduxLists);
 
 	return (
 		<div className="todo">
 			<ToDoContainer
-				addItemToList={addItemToList}
-				listItems={listItems}
+				addItemToList={() => dispatch(addReminderToList())}
+				listItems={reduxLists}
 				setListItems={setListItems}
-				newListItem={newListItem}
-				setNewListItem={setNewListItem}
+				// newListItem={newListItem}
+				// setNewListItem={setNewListItem}
 			/>
+
+			<button onClick={() => dispatch(test())}> Test </button>
 		</div>
 	);
 };
 
 export default App;
+
+// To do - new list items not displaying updated list
+// Look at using redux to better control reminder updates

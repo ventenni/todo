@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import ToDoItemList from './ToDoItemList';
 
-const ToDoContainer = ({
-	listItems,
-	newListItem,
-	setNewListItem,
-	addItemToList,
-}) => {
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import {
+	addList,
+	addReminderToList,
+	completeReminder,
+} from './../redux/todoSlice';
+
+const ToDoContainer = ({ listItems, addItemToList }) => {
 	const [selectedList, setSelectedList] = useState(listItems[0]);
+	const [newListItem, setNewListItem] = useState('');
+
+	const dispatch = useDispatch();
 
 	const changeList = (name) => {
 		setSelectedList(...listItems.filter((list) => list.name === name));
+	};
+
+	const addNewReminder = (e) => {
+		e.preventDefault();
+
+		dispatch(addReminderToList({ newListItem, selectedList }));
 	};
 
 	return (
@@ -42,6 +54,8 @@ const ToDoContainer = ({
 				<button onClick={(e) => addItemToList(e, selectedList)}>
 					Save
 				</button>
+
+				<button onClick={(e) => addNewReminder(e)}>Save Redux</button>
 			</div>
 		</div>
 	);
