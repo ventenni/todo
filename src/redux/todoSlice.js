@@ -12,7 +12,7 @@ export const reminderSlice = createSlice({
 					{
 						id: '0',
 						title: 'take out rubbish',
-						date: '01-01-2023',
+						date: new Date('2022-02-17T22:22'),
 						completed: false,
 					},
 					{
@@ -99,15 +99,38 @@ export const reminderSlice = createSlice({
 			addToLocalStorage(state);
 		},
 
-		completeReminder: (state, action) => {
+		toggleReminderStatus: (state, action) => {
+			const { itemId, listId } = action.payload;
+
 			state.reminders.forEach((list) => {
-				return list.forEach((item) => {
-					if (action.payload.id === item.id) {
-						item.completed = true;
-					}
-					return [];
-				});
+				if (list.id === listId) {
+					list.items.forEach((item) => {
+						if (itemId === item.id) {
+							item.completed = !item.completed;
+						}
+					});
+				}
 			});
+
+			addToLocalStorage(state);
+		},
+
+		updateItemDateAndTime: (state, action) => {
+			console.log('update');
+
+			const { itemId, listId, dateTime } = action.payload;
+
+			state.reminders.forEach((list) => {
+				if (list.id === listId) {
+					list.items.forEach((item) => {
+						if (itemId === item.id) {
+							item.date = dateTime;
+						}
+					});
+				}
+			});
+
+			addToLocalStorage(state);
 		},
 	},
 });
@@ -131,7 +154,12 @@ function addToLocalStorage(state) {
 }
 
 // Action creators are generated for each case reducer function
-export const { test, addList, addReminderToList, completeReminder } =
-	reminderSlice.actions;
+export const {
+	test,
+	addList,
+	addReminderToList,
+	toggleReminderStatus,
+	updateItemDateAndTime,
+} = reminderSlice.actions;
 
 export default reminderSlice.reducer;

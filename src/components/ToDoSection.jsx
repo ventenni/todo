@@ -29,7 +29,11 @@ const ToDoSection = ({ item, id }) => {
 			</div>
 
 			<div className="todo__container__items">
-				<ul>{item?.items && <ToDoItemList items={item.items} />}</ul>
+				<ul>
+					{item?.items && (
+						<ToDoItemList listId={item.id} items={item.items} />
+					)}
+				</ul>
 			</div>
 
 			<input
@@ -41,7 +45,7 @@ const ToDoSection = ({ item, id }) => {
 				}}
 			/>
 
-			<button onClick={(e) => addNewReminder(e, id)}>Save Redux</button>
+			<button onClick={(e) => addNewReminder(e, id)}>Save</button>
 		</div>
 	);
 };

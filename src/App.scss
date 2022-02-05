@@ -5,3 +5,9 @@
 		}
 	}
 }
+
+.todo__container__list__item {
+	&.completed {
+		background-color: green;
+	}
+}
