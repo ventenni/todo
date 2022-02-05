@@ -32,5 +32,4 @@ const App = () => {
 
 export default App;
 
-// To do - new list items not displaying updated list
-// Look at using redux to better control reminder updates
+// Error with date being added to the local storage

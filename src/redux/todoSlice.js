@@ -73,6 +73,7 @@ export const reminderSlice = createSlice({
 		test: (state) => {
 			state.value += 1;
 		},
+
 		addList: (state, action) => {
 			state.reminders.push({
 				id: state.reminders.length,
@@ -89,11 +90,13 @@ export const reminderSlice = createSlice({
 					list.items.push({
 						id: list.items.length,
 						title: action.payload.newListItem,
-						date: new Date() + 1,
+						date: new Date().toString(),
 						completed: false,
 					});
 				}
 			});
+
+			addToLocalStorage(state);
 		},
 
 		completeReminder: (state, action) => {
@@ -123,8 +126,8 @@ function setLocalStorage(key, initialValue) {
 	}
 }
 
-function addToLocalStorage() {
-	console.log('test');
+function addToLocalStorage(state) {
+	window.localStorage.setItem('todo', JSON.stringify([...state.reminders]));
 }
 
 // Action creators are generated for each case reducer function

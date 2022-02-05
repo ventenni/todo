@@ -16,7 +16,9 @@ const ToDoSection = ({ item, id }) => {
 
 	const addNewReminder = (e, id) => {
 		e.preventDefault();
-		dispatch(addReminderToList({ newListItem, id }));
+		if (newListItem.length > 0) {
+			dispatch(addReminderToList({ newListItem, id }));
+		}
 		setNewListItem('');
 	};
 
