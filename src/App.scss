@@ -1,13 +1,4 @@
-.todo {
-	background-color: #919191;
-	&__container {
-		&__list {
-		}
-	}
-}
-
-.todo__container__list__item {
-	&.completed {
-		background-color: green;
-	}
-}
+@import './styles/components/todo.scss';
+@import './styles/components/todo-container.scss';
+@import './styles//components/todo-item-list.scss';
+@import './styles//components/todo-list-item.scss';

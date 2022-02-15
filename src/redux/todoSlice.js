@@ -12,25 +12,29 @@ export const reminderSlice = createSlice({
 					{
 						id: '0',
 						title: 'take out rubbish',
-						date: new Date('2022-02-17T22:22'),
+						date: '2022-02-17',
+						time: '1200',
 						completed: false,
 					},
 					{
 						id: '1',
 						title: 'take out rubbish',
 						date: '01-01-2023',
+						time: '1200',
 						completed: false,
 					},
 					{
 						id: '2',
 						title: 'take out rubbish',
 						date: '01-01-2023',
+						time: '1200',
 						completed: false,
 					},
 					{
 						id: '3',
 						title: 'take out rubbish',
 						date: '01-01-2023',
+						time: '1200',
 						completed: false,
 					},
 				],
@@ -115,16 +119,35 @@ export const reminderSlice = createSlice({
 			addToLocalStorage(state);
 		},
 
-		updateItemDateAndTime: (state, action) => {
+		updateItemDate: (state, action) => {
+			console.log('update date');
+
+			const { itemId, listId, date } = action.payload;
+
+			state.reminders.forEach((list) => {
+				if (list.id === listId) {
+					list.items.forEach((item) => {
+						console.log(itemId, item.id);
+						if (itemId === item.id) {
+							item.date = date;
+						}
+					});
+				}
+			});
+
+			addToLocalStorage(state);
+		},
+
+		updateItemTime: (state, action) => {
 			console.log('update');
 
-			const { itemId, listId, dateTime } = action.payload;
+			const { itemId, listId, time } = action.payload;
 
 			state.reminders.forEach((list) => {
 				if (list.id === listId) {
 					list.items.forEach((item) => {
 						if (itemId === item.id) {
-							item.date = dateTime;
+							item.time = time;
 						}
 					});
 				}
@@ -159,7 +182,8 @@ export const {
 	addList,
 	addReminderToList,
 	toggleReminderStatus,
-	updateItemDateAndTime,
+	updateItemDate,
+	updateItemTime,
 } = reminderSlice.actions;
 
 export default reminderSlice.reducer;

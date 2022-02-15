@@ -3,12 +3,8 @@ import React, { useState } from 'react';
 import ToDoItemList from './ToDoItemList';
 
 // Redux
-import { useSelector, useDispatch } from 'react-redux';
-import {
-	// addList,
-	addReminderToList,
-	// completeReminder,
-} from './../redux/todoSlice';
+import { useDispatch } from 'react-redux';
+import { addReminderToList } from './../redux/todoSlice';
 
 const ToDoSection = ({ item, id }) => {
 	const [newListItem, setNewListItem] = useState('');
@@ -23,17 +19,15 @@ const ToDoSection = ({ item, id }) => {
 	};
 
 	return (
-		<div>
-			<div className="todo__container__lists">
+		<div className="todo-section">
+			<div className="todo-section__title">
 				<div>{item.name}</div>
 			</div>
 
-			<div className="todo__container__items">
-				<ul>
-					{item?.items && (
-						<ToDoItemList listId={item.id} items={item.items} />
-					)}
-				</ul>
+			<div className="todo-section__items">
+				{item?.items && (
+					<ToDoItemList listId={item.id} items={item.items} />
+				)}
 			</div>
 
 			<input

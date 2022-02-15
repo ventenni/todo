@@ -4,7 +4,8 @@ import ToDoItem from './ToDoItem';
 // Redux
 import {
 	toggleReminderStatus,
-	updateItemDateAndTime,
+	updateItemDate,
+	updateItemTime,
 } from './../redux/todoSlice';
 import { useDispatch } from 'react-redux';
 
@@ -15,19 +16,24 @@ const ToDoItemList = ({ listId, items }) => {
 		dispatch(toggleReminderStatus({ itemId, listId }));
 	};
 
-	const updateItemDateTime = (itemId, dateTime) => {
-		dispatch(updateItemDateAndTime({ itemId, listId, dateTime }));
+	const updateDate = (itemId, date) => {
+		dispatch(updateItemDate({ itemId, listId, date }));
+	};
+
+	const updateTime = (itemId, time) => {
+		dispatch(updateItemTime({ itemId, listId, time }));
 	};
 
 	return (
-		<ul>
+		<ul className="todo-item-list">
 			{items.map((item, i) => {
 				return (
 					<ToDoItem
 						item={item}
 						key={i}
 						toggleReminder={toggleReminder}
-						updateItemDateTime={updateItemDateTime}
+						updateItemDate={updateDate}
+						updateItemTime={updateTime}
 					/>
 				);
 			})}
