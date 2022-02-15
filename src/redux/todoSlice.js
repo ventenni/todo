@@ -96,6 +96,7 @@ export const reminderSlice = createSlice({
 						title: action.payload.newListItem,
 						date: new Date().toString(),
 						completed: false,
+						url: '',
 					});
 				}
 			});
@@ -153,6 +154,26 @@ export const reminderSlice = createSlice({
 				}
 			});
 
+			addToLocalStorage(state);
+		},
+
+		updateItemTitle: (state, action) => {
+			console.log('update');
+
+			const { itemId, listId, title } = action.payload;
+
+			state.reminders.forEach((list) => {
+				if (list.id === listId) {
+					list.items.forEach((item) => {
+						if (itemId === item.id) {
+							item.title = title;
+						}
+					});
+				}
+			});
+		},
+
+		saveStateToLocalStorage: (state) => {
 			addToLocalStorage(state);
 		},
 	},

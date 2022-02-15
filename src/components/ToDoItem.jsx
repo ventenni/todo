@@ -1,15 +1,29 @@
 import React, { useState } from 'react';
 
 // Reactstrap
-import { Collapse, Container, Row, Col } from 'reactstrap';
+import {
+	Container,
+	Row,
+	Col,
+	Modal,
+	ModalHeader,
+	ModalBody,
+	Input,
+} from 'reactstrap';
 
 const ToDoItem = ({ item, toggleReminder, updateItemDate, updateItemTime }) => {
-	const { id, completed, title, date, time } = item;
-	const [show, setShow] = useState(false);
+	const { id, completed, title, date, time, url } = item;
+
+	const [itemTitle, setItemTitle] = useState(title);
+	const [itemUrl, setItemUrl] = useState(url || '');
+
+	const [modalOpen, setModalOpen] = useState(false);
 
 	const toggleShow = (e) => {
 		e.preventDefault();
-		setShow(!show);
+		// setShow(!show);
+
+		setModalOpen(!modalOpen);
 	};
 
 	const isPastTimeDate = () => {
@@ -39,7 +53,7 @@ const ToDoItem = ({ item, toggleReminder, updateItemDate, updateItemTime }) => {
 			<Container>
 				<Row>
 					<Col>
-						<input
+						<Input
 							type="checkbox"
 							className={`todo-list-item__check`}
 							defaultChecked={completed}
@@ -65,11 +79,36 @@ const ToDoItem = ({ item, toggleReminder, updateItemDate, updateItemTime }) => {
 						</button>
 					</Col>
 				</Row>
+			</Container>
 
-				<Row>
-					<Collapse isOpen={show} tag="div">
+			<Modal isOpen={modalOpen}>
+				<ModalHeader
+					toggle={(e) => toggleShow(e)}
+					backdropTransition={150}
+					modalTransition={150}
+				>
+					Header
+				</ModalHeader>
+				<ModalBody>
+					<div className="modal-section">
+						<Input
+							placeholder="Title"
+							type="text"
+							value={itemTitle}
+							onChange={(e) => setItemTitle(e.target.value)}
+						/>
+
+						<Input
+							placeholder="Url"
+							type="text"
+							value={itemUrl}
+							onChange={(e) => setItemUrl(e.target.value)}
+						/>
+					</div>
+
+					<div className="modal-section">
 						<div>
-							<input
+							<Input
 								type="date"
 								defaultValue={date}
 								onChange={(e) =>
@@ -77,11 +116,10 @@ const ToDoItem = ({ item, toggleReminder, updateItemDate, updateItemTime }) => {
 								}
 							/>
 						</div>
-
-						{/* <div>
-							<input
+						<div>
+							<Input
 								type="time"
-								defaultValue={reminderTimeFormatted}
+								defaultValue={time}
 								onChange={(e) =>
 									updateItemTime(
 										id,
@@ -89,10 +127,13 @@ const ToDoItem = ({ item, toggleReminder, updateItemDate, updateItemTime }) => {
 									)
 								}
 							/>
-						</div> */}
-					</Collapse>
-				</Row>
-			</Container>
+						</div>
+					</div>
+
+					<div className="modal-section"></div>
+					<div className="modal-section"></div>
+				</ModalBody>
+			</Modal>
 		</li>
 	);
 };
