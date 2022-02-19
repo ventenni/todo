@@ -81,8 +81,10 @@ export const reminderSlice = createSlice({
 		addList: (state, action) => {
 			state.reminders.push({
 				id: state.reminders.length,
-				name: action.payload.name,
-				icon: action.payload.icon || '',
+				name:
+					action.payload?.name ||
+					`New List ${state.reminders.length}`,
+				icon: action.payload?.icon || '',
 				items: [],
 			});
 
