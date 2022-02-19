@@ -1,0 +1,27 @@
+Todo list
+
+
+Functionality
+- Make reminder lists collapsable X
+
+- Add new list functionality <-------
+
+- Implement time in whether the reminder is due or not (at the moment it's just date)
+- Set icon to reminder list
+- Set colour to reminder list
+- Use database instead of local storage
+- add image to reminder
+
+
+
+UI
+- Pick colour pallette
+- pick font
+- Copy iphone new reminder (no save button, input looks like another item)
+- Style modal
+	- style input sections
+- style reminder list
+- style reminder item
+	- align vertically all elements in input
+- Change reminder item icon
+- Add multiple colour pallette options

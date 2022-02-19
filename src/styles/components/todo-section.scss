@@ -1,2 +1,17 @@
 .todo-section {
+	margin-bottom: 1rem;
+	padding: 0.85em;
+	border-radius: 10px;
+	background: rgba(87, 87, 87, 0.6);
+
+	&__title {
+		position: relative;
+		padding-right: 1rem;
+
+		&__icon {
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+	}
 }

@@ -85,6 +85,8 @@ export const reminderSlice = createSlice({
 				icon: action.payload.icon || '',
 				items: [],
 			});
+
+			addToLocalStorage(state);
 		},
 
 		addReminderToList: (state, action) => {
