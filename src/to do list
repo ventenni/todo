@@ -3,11 +3,11 @@ Todo list
 
 Functionality
 - Make reminder lists collapsable X
+- Add new list functionality X
 
-- Add new list functionality <-------
+- Set icon to reminder list
 
 - Implement time in whether the reminder is due or not (at the moment it's just date)
-- Set icon to reminder list
 - Set colour to reminder list
 - Use database instead of local storage
 - add image to reminder
