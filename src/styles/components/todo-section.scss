@@ -4,6 +4,62 @@
 	border-radius: 10px;
 	background: rgba(87, 87, 87, 0.6);
 
+	&.purple {
+		background: $cl__default-bg;
+
+		p,
+		li,
+		a {
+			color: $cl__default-text;
+		}
+
+		svg {
+			fill: $cl__default-text;
+		}
+	}
+
+	&.orange {
+		background: $cl__orange-bg;
+
+		p,
+		li,
+		a {
+			color: $cl__orange-text;
+		}
+
+		svg {
+			fill: $cl__orange-text;
+		}
+	}
+
+	&.blue {
+		background: $cl__blue-bg;
+
+		p,
+		li,
+		a {
+			color: $cl__blue-text;
+		}
+
+		svg {
+			fill: $cl__blue-text;
+		}
+	}
+
+	&.pink {
+		background: $cl__pink-bg;
+
+		p,
+		li,
+		a {
+			color: $cl__pink-text;
+		}
+
+		svg {
+			fill: $cl__pink-text;
+		}
+	}
+
 	&__title {
 		position: relative;
 		padding-right: 1rem;

@@ -5,8 +5,9 @@ Functionality
 - Make reminder lists collapsable X
 - Add new list functionality X
 
-- Set icon to reminder list
+- settings for lists with colour picker
 
+- Set icon to reminder list
 - Implement time in whether the reminder is due or not (at the moment it's just date)
 - Set colour to reminder list
 - Use database instead of local storage
