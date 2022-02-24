@@ -8,6 +8,7 @@ export const reminderSlice = createSlice({
 				id: '0',
 				name: 'reminders',
 				icon: 'path/to/icon',
+				theme: 'default',
 				items: [
 					{
 						id: '0',
@@ -43,6 +44,7 @@ export const reminderSlice = createSlice({
 				id: '1',
 				name: 'groceries',
 				icon: 'path/to/icon',
+				theme: 'default',
 				items: [
 					{
 						id: '0',
@@ -180,6 +182,18 @@ export const reminderSlice = createSlice({
 		saveStateToLocalStorage: (state) => {
 			addToLocalStorage(state);
 		},
+
+		updateListThemeInState: (state, action) => {
+			// Create loop to update the relevant list
+
+			state.reminders.forEach((list) => {
+				if (list.id === action.payload.id) {
+					list.theme = action.payload.theme;
+				}
+			});
+
+			addToLocalStorage(state);
+		},
 	},
 });
 
@@ -209,6 +223,7 @@ export const {
 	toggleReminderStatus,
 	updateItemDate,
 	updateItemTime,
+	updateListThemeInState,
 } = reminderSlice.actions;
 
 export default reminderSlice.reducer;
