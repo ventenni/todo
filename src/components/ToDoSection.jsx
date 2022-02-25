@@ -3,15 +3,19 @@ import React, { useState } from 'react';
 import ToDoItemList from './ToDoItemList';
 
 // Reactstrap
-import { Collapse } from 'reactstrap';
+import { Collapse, Modal, ModalBody, ModalHeader } from 'reactstrap';
 
 // Redux
 import { useDispatch } from 'react-redux';
-import { addReminderToList } from './../redux/todoSlice';
+import {
+	addReminderToList,
+	updateListThemeInState,
+} from './../redux/todoSlice';
 
-const ToDoSection = ({ item, id }) => {
+const ToDoSection = ({ item, id, theme }) => {
 	const [newListItem, setNewListItem] = useState('');
 	const [isOpen, setIsOpen] = useState(false);
+	const [modalOpen, setModalOpen] = useState(false);
 	const dispatch = useDispatch();
 
 	const addNewReminder = (e, id) => {
@@ -22,8 +26,14 @@ const ToDoSection = ({ item, id }) => {
 		setNewListItem('');
 	};
 
+	const updateListTheme = (e) => {
+		// console.log('theme updated', e.target.value);
+
+		dispatch(updateListThemeInState({ id, theme: e.target.value }));
+	};
+
 	return (
-		<div className="todo-section">
+		<div className={`todo-section ${theme}`}>
 			<div
 				className="todo-section__title"
 				onClick={() => setIsOpen(!isOpen)}
@@ -47,6 +57,35 @@ const ToDoSection = ({ item, id }) => {
 			</div>
 
 			<Collapse isOpen={isOpen}>
+				<div className="todo-section__settings">
+					<a href="#" onClick={() => setModalOpen(!modalOpen)}>
+						Settings
+					</a>
+
+					<Modal isOpen={modalOpen}>
+						<ModalHeader
+							toggle={(e) => setModalOpen(false)}
+							backdropTransition={150}
+							modalTransition={150}
+						>
+							Header
+						</ModalHeader>
+
+						<ModalBody>
+							<select
+								onChange={(e) => updateListTheme(e)}
+								defaultValue={theme}
+							>
+								<option value="default">Default</option>
+								<option value="purple">Purple</option>
+								<option value="orange">Orange</option>
+								<option value="blue">Blue</option>
+								<option value="pink">Pink</option>
+							</select>
+						</ModalBody>
+					</Modal>
+				</div>
+
 				<div className="todo-section__items">
 					{item?.items && (
 						<ToDoItemList listId={item.id} items={item.items} />

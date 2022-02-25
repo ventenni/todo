@@ -1,6 +1,11 @@
 body {
-	height: 100vw;
+	width: 100vw;
+	height: 100vh;
 }
+
+// * {
+// 	outline: 1px solid red;
+// }
 
 #root {
 	height: 100vh;
@@ -12,5 +17,6 @@ p {
 
 p,
 li {
+	font-weight: 600;
 	color: #fff;
 }

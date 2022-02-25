@@ -14,7 +14,14 @@ const ToDoContainer = ({ listItems }) => {
 	return (
 		<div className="todo-container">
 			{listItems.map((item, i) => {
-				return <ToDoSection item={item} id={item.id} key={i} />;
+				return (
+					<ToDoSection
+						item={item}
+						id={item.id}
+						key={i}
+						theme={item.theme}
+					/>
+				);
 			})}
 
 			<div>
