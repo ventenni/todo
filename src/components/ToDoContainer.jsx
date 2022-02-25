@@ -20,6 +20,7 @@ const ToDoContainer = ({ listItems }) => {
 						id={item.id}
 						key={i}
 						theme={item.theme}
+						showCompletedTasks={item.showCompletedTasks}
 					/>
 				);
 			})}

@@ -9,11 +9,15 @@ import {
 } from './../redux/todoSlice';
 import { useDispatch } from 'react-redux';
 
-const ToDoItemList = ({ listId, items }) => {
+const ToDoItemList = ({ listId, items, showCompletedTasks }) => {
 	const dispatch = useDispatch();
 
-	const toggleReminder = (itemId) => {
-		dispatch(toggleReminderStatus({ itemId, listId }));
+	const toggleReminder = (itemId, completed) => {
+		const timeout = completed ? 500 : 2000;
+
+		setTimeout(() => {
+			dispatch(toggleReminderStatus({ itemId, listId }));
+		}, timeout);
 	};
 
 	const updateDate = (itemId, date) => {
@@ -29,11 +33,11 @@ const ToDoItemList = ({ listId, items }) => {
 
 	return (
 		<ul className="todo-item-list">
-			{incompletedItems.map((item, i) => {
+			{incompletedItems.map((item) => {
 				return (
 					<ToDoItem
 						item={item}
-						key={i}
+						key={item.id}
 						toggleReminder={toggleReminder}
 						updateItemDate={updateDate}
 						updateItemTime={updateTime}
@@ -41,17 +45,18 @@ const ToDoItemList = ({ listId, items }) => {
 				);
 			})}
 
-			{completedItems.map((item, i) => {
-				return (
-					<ToDoItem
-						item={item}
-						key={i}
-						toggleReminder={toggleReminder}
-						updateItemDate={updateDate}
-						updateItemTime={updateTime}
-					/>
-				);
-			})}
+			{showCompletedTasks &&
+				completedItems.map((item) => {
+					return (
+						<ToDoItem
+							item={item}
+							key={item.id}
+							toggleReminder={toggleReminder}
+							updateItemDate={updateDate}
+							updateItemTime={updateTime}
+						/>
+					);
+				})}
 		</ul>
 	);
 };

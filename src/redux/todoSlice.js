@@ -1,38 +1,41 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
 export const reminderSlice = createSlice({
 	name: 'reminder',
 	initialState: {
 		reminders: setLocalStorage('todo', [
 			{
-				id: '0',
+				id: '8EE6CFC6-3C9D-4A86-81D1-F3073BFD67F7',
 				name: 'reminders',
 				icon: 'path/to/icon',
 				theme: 'default',
+				showCompletedTasks: false,
 				items: [
 					{
-						id: '0',
+						id: '0BE1BBC8-C889-4815-A226-1FEA8305A205',
 						title: 'take out rubbish',
 						date: '2022-02-17',
 						time: '1200',
 						completed: false,
+						url: '',
 					},
 					{
-						id: '1',
+						id: '10F39E47-774A-4B36-BCC9-75BA15A4C4D9',
 						title: 'take out rubbish',
 						date: '01-01-2023',
 						time: '1200',
 						completed: false,
 					},
 					{
-						id: '2',
+						id: '0259BF99-C317-4E01-8DBF-5DCA231BE238',
 						title: 'take out rubbish',
 						date: '01-01-2023',
 						time: '1200',
 						completed: false,
 					},
 					{
-						id: '3',
+						id: '169AE334-1D36-445E-AFDF-907D9516D60D',
 						title: 'take out rubbish',
 						date: '01-01-2023',
 						time: '1200',
@@ -41,31 +44,32 @@ export const reminderSlice = createSlice({
 				],
 			},
 			{
-				id: '1',
+				id: '6486EFF4-A32E-4FF3-859E-D390520CDD6B',
 				name: 'groceries',
 				icon: 'path/to/icon',
 				theme: 'default',
+				showCompletedTasks: false,
 				items: [
 					{
-						id: '0',
+						id: 'A6DACCFA-CCB2-4C8C-906B-389B592CD79B',
 						title: 'eggs',
 						date: '',
 						completed: false,
 					},
 					{
-						id: '1',
+						id: '236BDDC1-B5A1-4E43-B7F6-294A2E21039B',
 						title: 'eggs',
 						date: '',
 						completed: false,
 					},
 					{
-						id: '2',
+						id: '863EF9BC-E0B3-45C8-ADDF-C897C450489C',
 						title: 'eggs',
 						date: '',
 						completed: false,
 					},
 					{
-						id: '3',
+						id: 'A2925CC2-5AE4-493C-97A8-30E75699CB92',
 						title: 'eggs',
 						date: '',
 						completed: false,
@@ -82,7 +86,7 @@ export const reminderSlice = createSlice({
 
 		addList: (state, action) => {
 			state.reminders.push({
-				id: state.reminders.length,
+				id: uuidv4(),
 				name:
 					action.payload?.name ||
 					`New List ${state.reminders.length}`,
@@ -98,7 +102,7 @@ export const reminderSlice = createSlice({
 			state.reminders.forEach((list) => {
 				if (list.id === action.payload.id) {
 					list.items.push({
-						id: list.items.length,
+						id: uuidv4(),
 						title: action.payload.newListItem,
 						date: new Date().toString(),
 						completed: false,
@@ -184,8 +188,6 @@ export const reminderSlice = createSlice({
 		},
 
 		updateListThemeInState: (state, action) => {
-			// Create loop to update the relevant list
-
 			state.reminders.forEach((list) => {
 				if (list.id === action.payload.id) {
 					list.theme = action.payload.theme;
@@ -193,6 +195,18 @@ export const reminderSlice = createSlice({
 			});
 
 			addToLocalStorage(state);
+		},
+
+		updateListShowHideCompletedTasks: (state, action) => {
+			console.log('hit it');
+			state.reminders.forEach((list) => {
+				if (list.id === action.payload.id) {
+					console.log('updating');
+					list.showCompletedTasks = action.payload.showCompletedTasks;
+				}
+
+				addToLocalStorage(state);
+			});
 		},
 	},
 });
@@ -224,6 +238,7 @@ export const {
 	updateItemDate,
 	updateItemTime,
 	updateListThemeInState,
+	updateListShowHideCompletedTasks,
 } = reminderSlice.actions;
 
 export default reminderSlice.reducer;

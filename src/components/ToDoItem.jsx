@@ -19,6 +19,8 @@ const ToDoItem = ({ item, toggleReminder, updateItemDate, updateItemTime }) => {
 
 	const [modalOpen, setModalOpen] = useState(false);
 
+	const [completing, setCompleting] = useState('');
+
 	const toggleShow = (e) => {
 		e.preventDefault();
 		// setShow(!show);
@@ -32,15 +34,6 @@ const ToDoItem = ({ item, toggleReminder, updateItemDate, updateItemTime }) => {
 
 		const dueDate = new Date(date).getTime() + time;
 
-		// if (time > 0) {
-		// 	console.log('date up', timeNow < dueDate, {
-		// 		today: new Date(),
-		// 		time,
-		// 		timeNow,
-		// 		dueDate,
-		// 	});
-		// }
-
 		return timeNow > dueDate;
 	};
 
@@ -48,8 +41,18 @@ const ToDoItem = ({ item, toggleReminder, updateItemDate, updateItemTime }) => {
 		backgroundColor: isPastTimeDate() ? 'hsl(0, 71%, 86%)' : '',
 	};
 
+	const toggleCompleting = () => {
+		setTimeout(() => {
+			setCompleting('completing');
+		}, 1700);
+
+		setTimeout(() => {
+			setCompleting('');
+		}, 2000);
+	};
+
 	return (
-		<li className={`todo-list-item`} style={overdue}>
+		<li className={`todo-list-item ${completing}`} style={overdue}>
 			<Container>
 				<Row>
 					<Col>
@@ -57,7 +60,10 @@ const ToDoItem = ({ item, toggleReminder, updateItemDate, updateItemTime }) => {
 							type="checkbox"
 							className={`todo-list-item__check`}
 							defaultChecked={completed}
-							onChange={() => toggleReminder(id)}
+							onChange={() => {
+								toggleCompleting();
+								toggleReminder(id, completed);
+							}}
 						/>
 
 						<label>{`${title}`}</label>

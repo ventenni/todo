@@ -14,6 +14,7 @@ Functionality
 -   Set colour to reminder list
 -   Use database instead of local storage
 -   add image to reminder
+-   Be able to get last state from redux as undo
 
 UI
 
