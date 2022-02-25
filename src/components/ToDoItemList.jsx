@@ -24,9 +24,24 @@ const ToDoItemList = ({ listId, items }) => {
 		dispatch(updateItemTime({ itemId, listId, time }));
 	};
 
+	const incompletedItems = items.filter((item) => !item.completed);
+	const completedItems = items.filter((item) => item.completed);
+
 	return (
 		<ul className="todo-item-list">
-			{items.map((item, i) => {
+			{incompletedItems.map((item, i) => {
+				return (
+					<ToDoItem
+						item={item}
+						key={i}
+						toggleReminder={toggleReminder}
+						updateItemDate={updateDate}
+						updateItemTime={updateTime}
+					/>
+				);
+			})}
+
+			{completedItems.map((item, i) => {
 				return (
 					<ToDoItem
 						item={item}
