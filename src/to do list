@@ -1,28 +1,30 @@
 Todo list
 
-
 Functionality
-- Make reminder lists collapsable X
-- Add new list functionality X
 
-- settings for lists with colour picker
+-   Make reminder lists collapsable X
+-   Add new list functionality X
+-   settings for lists
 
-- Set icon to reminder list
-- Implement time in whether the reminder is due or not (at the moment it's just date)
-- Set colour to reminder list
-- Use database instead of local storage
-- add image to reminder
+    -   colour picker X
+    -   show/hide completed <---
 
-
+-   Set icon to reminder list
+-   Implement time in whether the reminder is due or not (at the moment it's just date)
+-   Set colour to reminder list
+-   Use database instead of local storage
+-   add image to reminder
+-   Be able to get last state from redux as undo
 
 UI
-- Pick colour pallette
-- pick font
-- Copy iphone new reminder (no save button, input looks like another item)
-- Style modal
-	- style input sections
-- style reminder list
-- style reminder item
-	- align vertically all elements in input
-- Change reminder item icon
-- Add multiple colour pallette options
+
+-   Pick colour pallette
+-   pick font
+-   Copy iphone new reminder (no save button, input looks like another item)
+-   Style modal
+    -   style input sections
+-   style reminder list
+-   style reminder item
+    -   align vertically all elements in input
+-   Change reminder item icon
+-   Add multiple colour pallette options

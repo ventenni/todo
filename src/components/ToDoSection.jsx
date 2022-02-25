@@ -3,19 +3,29 @@ import React, { useState } from 'react';
 import ToDoItemList from './ToDoItemList';
 
 // Reactstrap
-import { Collapse, Modal, ModalBody, ModalHeader } from 'reactstrap';
+import {
+	Collapse,
+	FormGroup,
+	Input,
+	Label,
+	Modal,
+	ModalBody,
+	ModalHeader,
+} from 'reactstrap';
 
 // Redux
 import { useDispatch } from 'react-redux';
 import {
 	addReminderToList,
 	updateListThemeInState,
+	updateListShowHideCompletedTasks,
 } from './../redux/todoSlice';
 
-const ToDoSection = ({ item, id, theme }) => {
+const ToDoSection = ({ item, id, theme, showCompletedTasks }) => {
 	const [newListItem, setNewListItem] = useState('');
 	const [isOpen, setIsOpen] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
+
 	const dispatch = useDispatch();
 
 	const addNewReminder = (e, id) => {
@@ -30,6 +40,15 @@ const ToDoSection = ({ item, id, theme }) => {
 		// console.log('theme updated', e.target.value);
 
 		dispatch(updateListThemeInState({ id, theme: e.target.value }));
+	};
+
+	const updateCompletedTasksVisibility = () => {
+		dispatch(
+			updateListShowHideCompletedTasks({
+				id,
+				showCompletedTasks: !showCompletedTasks,
+			})
+		);
 	};
 
 	return (
@@ -82,13 +101,31 @@ const ToDoSection = ({ item, id, theme }) => {
 								<option value="blue">Blue</option>
 								<option value="pink">Pink</option>
 							</select>
+
+							<FormGroup>
+								<Label>
+									<Input
+										type="checkbox"
+										value={showCompletedTasks}
+										defaultChecked={showCompletedTasks}
+										onChange={() =>
+											updateCompletedTasksVisibility()
+										}
+									/>
+									Show Completed
+								</Label>
+							</FormGroup>
 						</ModalBody>
 					</Modal>
 				</div>
 
 				<div className="todo-section__items">
 					{item?.items && (
-						<ToDoItemList listId={item.id} items={item.items} />
+						<ToDoItemList
+							listId={item.id}
+							items={item.items}
+							showCompletedTasks={showCompletedTasks}
+						/>
 					)}
 				</div>
 

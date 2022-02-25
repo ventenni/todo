@@ -1,6 +1,12 @@
 .todo-list-item {
 	display: flex;
 	align-items: center;
+	opacity: 1;
+	transition: opacity 300ms ease-in;
+
+	&.completing {
+		opacity: 0;
+	}
 
 	.col {
 		position: relative;
