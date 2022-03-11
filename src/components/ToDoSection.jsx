@@ -81,7 +81,7 @@ const ToDoSection = ({ item, id, theme, showCompletedTasks }) => {
 						Settings
 					</a>
 
-					<Modal isOpen={modalOpen}>
+					<Modal isOpen={modalOpen} className={`${theme}`}>
 						<ModalHeader
 							toggle={(e) => setModalOpen(false)}
 							backdropTransition={150}
@@ -125,6 +125,7 @@ const ToDoSection = ({ item, id, theme, showCompletedTasks }) => {
 							listId={item.id}
 							items={item.items}
 							showCompletedTasks={showCompletedTasks}
+							theme={theme}
 						/>
 					)}
 				</div>

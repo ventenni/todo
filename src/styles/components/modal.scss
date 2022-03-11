@@ -1,0 +1,45 @@
+.modal-dialog {
+	h5 {
+		font-weight: 700;
+	}
+
+	&.pink {
+		.modal-content {
+			background: $cl__pink-bg;
+		}
+
+		.modal-header {
+			border-color: $cl__pink-border;
+		}
+	}
+
+	&.orange {
+		.modal-content {
+			background: $cl__orange-bg;
+		}
+
+		.modal-header {
+			border-color: $cl__orange-border;
+		}
+	}
+
+	&.blue {
+		.modal-content {
+			background: $cl__blue-bg;
+		}
+
+		.modal-header {
+			border-color: $cl__blue-border;
+		}
+	}
+
+	.modal-section {
+		padding: 1rem;
+		background: rgba(#000, 0.3);
+		border-radius: 10px;
+
+		input:not(:last-child) {
+			margin-bottom: 0.5rem;
+		}
+	}
+}
