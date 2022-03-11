@@ -9,7 +9,7 @@ import {
 } from './../redux/todoSlice';
 import { useDispatch } from 'react-redux';
 
-const ToDoItemList = ({ listId, items, showCompletedTasks }) => {
+const ToDoItemList = ({ listId, items, showCompletedTasks, theme }) => {
 	const dispatch = useDispatch();
 
 	const toggleReminder = (itemId, completed) => {
@@ -41,6 +41,7 @@ const ToDoItemList = ({ listId, items, showCompletedTasks }) => {
 						toggleReminder={toggleReminder}
 						updateItemDate={updateDate}
 						updateItemTime={updateTime}
+						theme={theme}
 					/>
 				);
 			})}
@@ -54,6 +55,7 @@ const ToDoItemList = ({ listId, items, showCompletedTasks }) => {
 							toggleReminder={toggleReminder}
 							updateItemDate={updateDate}
 							updateItemTime={updateTime}
+							theme={theme}
 						/>
 					);
 				})}

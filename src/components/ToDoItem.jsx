@@ -11,7 +11,13 @@ import {
 	Input,
 } from 'reactstrap';
 
-const ToDoItem = ({ item, toggleReminder, updateItemDate, updateItemTime }) => {
+const ToDoItem = ({
+	item,
+	toggleReminder,
+	updateItemDate,
+	updateItemTime,
+	theme,
+}) => {
 	const { id, completed, title, date, time, url } = item;
 
 	const [itemTitle, setItemTitle] = useState(title);
@@ -88,7 +94,7 @@ const ToDoItem = ({ item, toggleReminder, updateItemDate, updateItemTime }) => {
 				</Row>
 			</Container>
 
-			<Modal isOpen={modalOpen}>
+			<Modal isOpen={modalOpen} className={`${theme}`}>
 				<ModalHeader
 					toggle={(e) => toggleShow(e)}
 					backdropTransition={150}
@@ -114,31 +120,22 @@ const ToDoItem = ({ item, toggleReminder, updateItemDate, updateItemTime }) => {
 					</div>
 
 					<div className="modal-section">
-						<div>
-							<Input
-								type="date"
-								defaultValue={date}
-								onChange={(e) =>
-									updateItemDate(id, e.target.value)
-								}
-							/>
-						</div>
-						<div>
-							<Input
-								type="time"
-								defaultValue={time}
-								onChange={(e) =>
-									updateItemTime(
-										id,
-										e.target.valueAsDate.getTime()
-									)
-								}
-							/>
-						</div>
+						<Input
+							type="date"
+							defaultValue={date}
+							onChange={(e) => updateItemDate(id, e.target.value)}
+						/>
+						<Input
+							type="time"
+							defaultValue={time}
+							onChange={(e) =>
+								updateItemTime(
+									id,
+									e.target.valueAsDate.getTime()
+								)
+							}
+						/>
 					</div>
-
-					<div className="modal-section"></div>
-					<div className="modal-section"></div>
 				</ModalBody>
 			</Modal>
 		</li>

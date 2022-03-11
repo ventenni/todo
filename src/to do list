@@ -9,6 +9,8 @@ Functionality
     -   colour picker X
     -   show/hide completed <---
 
+-   Edit list name
+-   edit list item name
 -   Set icon to reminder list
 -   Implement time in whether the reminder is due or not (at the moment it's just date)
 -   Set colour to reminder list
